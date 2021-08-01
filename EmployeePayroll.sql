@@ -11,7 +11,7 @@ startDate date
 
 ---------UC3- Insert data to Table-----------
 insert into employee_payroll values 
-('lionel',300000,'2008-03-05'),('neymar',10000,'2011-06-14'),
+('georgina',3000,'2006-08-05','F'),('antolina',1500,'2013-06-04','F'),
 ('cristiano',25000,'2005-07-07'),('Dias',5000,'2020-05-03');
 
 -------UC4-Retrieve Data------------
@@ -20,3 +20,8 @@ select * from employee_payroll;
 --------UC5- Retrieving particular Data--------
 select salary,startDate from employee_payroll where name='neymar'; 
 select * from employee_payroll where startDate between cast('2010-10-10' as date) and getdate();
+
+---------UC6-Alter table by Adding Column----------
+alter table employee_payroll add Gender char ;
+
+update employee_payroll set Gender='M';
