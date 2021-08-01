@@ -13,3 +13,6 @@ startDate date
 insert into employee_payroll values 
 ('lionel',300000,'2008-03-05'),('neymar',10000,'2011-06-14'),
 ('cristiano',25000,'2005-07-07'),('Dias',5000,'2020-05-03');
+
+-------UC4-Retrieve Data------------
+select * from employee_payroll;
