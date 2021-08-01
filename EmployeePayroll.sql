@@ -16,3 +16,7 @@ insert into employee_payroll values
 
 -------UC4-Retrieve Data------------
 select * from employee_payroll;
+
+--------UC5- Retrieving particular Data--------
+select salary,startDate from employee_payroll where name='neymar'; 
+select * from employee_payroll where startDate between cast('2010-10-10' as date) and getdate();
