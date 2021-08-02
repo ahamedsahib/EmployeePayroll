@@ -25,3 +25,14 @@ select * from employee_payroll where startDate between cast('2010-10-10' as date
 alter table employee_payroll add Gender char ;
 
 update employee_payroll set Gender='M';
+
+----------UC7-Aggreate Function------------
+Select Gender,Min(salary)as MinSalary from employee_payroll group by Gender;
+--Max--
+ Select Gender,Max(salary)as MaxSalary from employee_payroll  group by Gender;
+ --Sum--
+ Select Gender,Sum(salary)as TotalSalary from employee_payroll where Gender='F' group by Gender;
+ --Avg--
+ Select Gender,Avg(salary)as AvgSalary from employee_payroll where Gender='M' group by Gender;
+ --Count--
+ Select Gender, count(Gender)as Count from employee_payroll group by Gender order by Gender DESC;
