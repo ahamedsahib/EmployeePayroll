@@ -59,3 +59,6 @@ update employee_payroll set Deductions=300,NetPay=12000 where name='georgina';
 update employee_payroll set Deductions=550,NetPay=10000 where name='antolina';
 
 select * from employee_payroll;
+
+--------UC10 Duplicate data---------
+Insert into employee_payroll values('cristiano',32000,'2021-04-25','M',54265442963,'Chennai','Marketing',500,10000,2300,15500);
