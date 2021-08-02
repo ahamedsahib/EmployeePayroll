@@ -28,11 +28,19 @@ update employee_payroll set Gender='M';
 
 ----------UC7-Aggreate Function------------
 Select Gender,Min(salary)as MinSalary from employee_payroll group by Gender;
---Max--
- Select Gender,Max(salary)as MaxSalary from employee_payroll  group by Gender;
- --Sum--
- Select Gender,Sum(salary)as TotalSalary from employee_payroll where Gender='F' group by Gender;
- --Avg--
- Select Gender,Avg(salary)as AvgSalary from employee_payroll where Gender='M' group by Gender;
- --Count--
- Select Gender, count(Gender)as Count from employee_payroll group by Gender order by Gender DESC;
+Select Gender,Max(salary)as MaxSalary from employee_payroll  group by Gender;
+Select Gender,Sum(salary)as TotalSalary from employee_payroll where Gender='F' group by Gender;
+Select Gender,Avg(salary)as AvgSalary from employee_payroll where Gender='M' group by Gender;
+Select Gender, count(Gender)as Count from employee_payroll group by Gender order by Gender DESC;
+
+------UC8 Default Value---------
+alter table employee_payroll add phone bigint,address varchar(50),department varchar(50) not null default 'physical' ;
+
+update employee_payroll set phone=54376543210,department='Testing',address='broadway' where name='lionel';
+update employee_payroll set phone=32565412350,department='HR',address='parrys' where name='neymar';
+update employee_payroll set phone=46387873210,department='Design',address='besent' where name='cristiano';
+update employee_payroll set phone=34537347964,department='Automation',address='park Town' where name='Dias';
+update employee_payroll set phone=74185296340,department='Security',address='egmore' where name='georgina';
+update employee_payroll set phone=36347643630,department='Finance',address='broadway' where name='antolina';
+
+
