@@ -44,3 +44,18 @@ update employee_payroll set phone=74185296340,department='Security',address='egm
 update employee_payroll set phone=36347643630,department='Finance',address='broadway' where name='antolina';
 
 
+----------UC9 Rename and Add Multiple Column----------
+EXEC sp_rename'employee_payroll.salary','BasicPay','COLUMN';
+
+alter table employee_payroll add Deductions float,TaxablePay float,IncomeTax float,NetPay float;
+
+update employee_payroll set IncomeTax=2500,TaxablePay=10000;
+
+update employee_payroll set Deductions=300,NetPay=300000 where name='lionel';
+update employee_payroll set Deductions=1700,NetPay=15000 where name='neymar';
+update employee_payroll set Deductions=2000,NetPay=300000 where name='cristiano';
+update employee_payroll set Deductions=1500,NetPay=30000 where name='Dias';
+update employee_payroll set Deductions=300,NetPay=12000 where name='georgina';
+update employee_payroll set Deductions=550,NetPay=10000 where name='antolina';
+
+select * from employee_payroll;
