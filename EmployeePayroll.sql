@@ -175,3 +175,24 @@ Payroll as p ON
 emp.EmployeeId = p.EmployeeId
 GROUP BY Gender
 ORDER BY Gender DESC;
+
+------UC12 Refactor ---------
+SELECT comp.CompanyID,comp.CompanyName,emp.EmployeeId,emp.EmployeeName,emp.PhoneNumber,emp.StartDate,emp.Gender,
+p.BasicPay,p.TaxablePay,p.IncomeTax,p.NetPay,p.Deductions,d.DeptId,d.DepartmentName
+FROM Company AS comp
+INNER JOIN Employee AS emp ON comp.CompanyId=emp.CompanyId
+INNER JOIN Payroll AS p ON p.EmployeeId = emp.EmployeeId
+INNER JOIN EmployeeDepartment ON EmployeeDepartment.EmployeeId = emp.EmployeeId
+INNER JOIN Department as d ON d.DeptId = EmployeeDepartment.DeptId;
+
+----Retrive using emp name--------------------------------------------------
+SELECT c.CompanyID,c.CompanyName,emp.EmployeeId,emp.EmployeeName,emp.PhoneNumber,emp.StartDate,emp.Gender
+FROM Company AS c 
+INNER JOIN Employee AS emp 
+ON
+c.CompanyId = emp.CompanyId AND emp.EmployeeName='Ashfaq';
+----------------------------------------------------------------------------
+SELECT c.CompanyID,c.CompanyName,emp.EmployeeId,emp.EmployeeName,emp.PhoneNumber,emp.StartDate,emp.Gender
+FROM Company AS c 
+INNER JOIN Employee AS emp 
+ON c.CompanyId = emp.CompanyId AND emp.StartDate BETWEEN ('2006-05-01') AND getdate();
