@@ -62,3 +62,116 @@ select * from employee_payroll;
 
 --------UC10 Duplicate data---------
 Insert into employee_payroll values('cristiano',32000,'2021-04-25','M',54265442963,'Chennai','Marketing',500,10000,2300,15500);
+
+ -------UC11 Normalization-----------
+ --Using Er Diagram--
+
+--Creating Company table
+create table Company(
+	CompanyId int identity(1,1) Primary key,
+	CompanyName varchar(30)
+);
+
+--Creating Employee Table
+create table Employee(
+	EmployeeId int identity(1,1) Primary key,
+	CompanyId int FOREIGN KEY REFERENCES Company(CompanyId),
+	EmployeeName varchar(30),
+	PhoneNumber bigint,
+	EmpAddress varchar(50),
+	StartDate date,
+	Gender char(1)
+);
+--Creating Payroll table
+create table Payroll(
+	EmployeeId int FOREIGN KEY REFERENCES Employee(EmployeeId),
+	BasicPay float,
+	TaxablePay float,
+	IncomeTax float,
+	NetPay float,
+	Deductions float
+);
+
+--Creating Deptartment table
+create table Department(
+	DeptId int identity(1,1) Primary key,
+	DepartmentName varchar(30)
+);
+--Creating EmployeeDepartment Table
+create table EmployeeDepartment(
+	EmployeeId int FOREIGN KEY REFERENCES Employee(EmployeeId),
+	DeptId int FOREIGN KEY REFERENCES Department(DeptId),
+);
+
+Insert into Company values('Nike'),('Addidas'),('PUMA');
+
+-------------
+Insert into Employee values
+ (1,'Ahamed',96473829856,'Chennai','2021-05-25','M'),
+ (2,'Ashfaq',8326528211,'Delhi','2018-3-13','M'),
+(2,' Noohu',82445433210,'Calcutta','2008-7-13','M'),
+(3,'Sam',9876543210,'Banglaore','2005-6-11','F');
+
+SELECT * FROM Employee;
+
+
+-------
+Insert into Payroll(EmployeeId,BasicPay,IncomeTax,Deductions) Values (1,25000,1000,1200),(2,17000,1000,600),(3,35000,1000,700),(4,22000,1000,700);
+SELECT * FROM Payroll;
+--Updating taxable pay based on basic pay - deductions
+Update Payroll set TaxablePay=BasicPay-Deductions;
+--Updating Netpay based on taxablepay-incometax
+Update Payroll set NetPay=TaxablePay-IncomeTax;
+
+
+---------------------------------------------------------------------------
+INSERT INTO Department values('Developer'),('IT'),('Marketing'),('sales');
+
+SELECT * FROM Department;
+
+---------------------------------------------------------------------------
+INSERT INTO EmployeeDepartment values(1,2),(2,1),(3,4),(4,4);
+
+SELECT * FROM EmployeeDepartment;
+
+--AGGREGATE FUNCTIONS
+----------------------------------------------------------------------------
+SELECT SUM(p.BasicPay) as TotalSalary,emp.Gender
+FROM Employee as emp
+INNER JOIN
+Payroll as p ON
+emp.EmployeeId = p.EmployeeId
+GROUP BY Gender
+ORDER BY Gender DESC;
+---------------------------------------------------------------------------
+SELECT AVG(p.BasicPay) as AverageSalary,emp.Gender
+FROM Employee as emp
+INNER JOIN
+Payroll as p ON
+emp.EmployeeId = p.EmployeeId
+GROUP BY Gender
+ORDER BY Gender DESC;
+---------------------------------------------------------------------------
+SELECT MIN(p.BasicPay) as MinSalary,emp.Gender
+FROM Employee as emp
+INNER JOIN
+Payroll as p ON
+emp.EmployeeId = p.EmployeeId
+GROUP BY Gender
+ORDER BY Gender DESC;
+-------------------------------------------------------------------------------
+SELECT MAX(p.BasicPay) as MaxSalary,emp.Gender
+FROM Employee as emp
+INNER JOIN
+Payroll as p ON
+emp.EmployeeId = p.EmployeeId
+GROUP BY Gender
+ORDER BY Gender DESC;
+-------------------------------------------------------------------------------
+SELECT COUNT(p.BasicPay) as TotalCount,emp.Gender
+FROM Employee as emp
+INNER JOIN
+Payroll as p ON
+emp.EmployeeId = p.EmployeeId
+GROUP BY Gender
+ORDER BY Gender DESC;
